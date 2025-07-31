@@ -1,0 +1,36 @@
+{
+  "properties": {
+    "displayName": "Enforce Storage Account Naming Convention",
+    "description": "This policy ensures that storage accounts follow the naming convention: 'stg-{projectcode}'",
+    "mode": "Indexed",
+    "parameters": {
+      "prefix": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Prefix",
+          "description": "The required prefix for storage account names"
+        },
+        "defaultValue": "stg-"
+      }
+    },
+    "policyRule": {
+      "if": {
+        "allOf": [
+          {
+            "field": "type",
+            "equals": "Microsoft.Storage/storageAccounts"
+          },
+          {
+            "not": {
+              "field": "name",
+              "like": "[concat(parameters('prefix'), '*')]"
+            }
+          }
+        ]
+      },
+      "then": {
+        "effect": "deny"
+      }
+    }
+  }
+}

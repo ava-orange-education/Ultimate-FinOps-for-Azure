@@ -1,0 +1,6 @@
+Perf
+| where ObjectName == "Processor"
+| where CounterName == "% Processor Time"
+| where InstanceName == "_Total"
+| project TimeGenerated, CounterValue
+| summarize avg(CounterValue) by bin(TimeGenerated, 1h)

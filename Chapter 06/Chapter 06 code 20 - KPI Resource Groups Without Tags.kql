@@ -1,0 +1,2 @@
+resourcecontainers
+| where type == "microsoft.resources/subscriptions/resourcegroups" and isnull(tags)

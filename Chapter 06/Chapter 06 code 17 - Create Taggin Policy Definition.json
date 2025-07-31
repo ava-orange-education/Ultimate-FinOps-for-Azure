@@ -1,0 +1,41 @@
+{
+    "properties": {
+        "displayName": "Restrict Resource Group Creation to Specific Tags and Values",
+        "policyType": "Custom",
+        "mode": "All",
+        "description": "Allows resource group creation only if the specified tags and values are present.",
+        "parameters": {},
+        "policyRule": {
+            "if": {
+                "allOf": [
+                    {
+                        "field": "type",
+                        "equals": "Microsoft.Resources/subscriptions/resourceGroups"
+                    },
+                    {
+                        "anyOf": [
+                            {
+                                "field": "tags.Department",
+                                "notIn": [
+                                    "Finance",
+                                    "Marketing",
+                                    "Engineering"
+                                ]
+                            },
+                            {
+                                "field": "tags.Project",
+                                "notIn": [
+                                    "Alpha",
+                                    "Beta"
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            "then": {
+                "effect": "deny"
+            }
+        }
+    }
+}

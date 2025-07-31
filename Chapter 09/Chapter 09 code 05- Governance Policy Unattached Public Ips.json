@@ -1,0 +1,17 @@
+    "policyRule": {
+      "if": {
+        "allOf": [
+          {
+            "field": "type",
+            "equals": "Microsoft.Network/publicIPAddresses"
+          },
+          {
+            "field": "Microsoft.Network/publicIPAddresses/ipConfiguration.id",
+            "equals": "null"
+          }
+        ]
+      },
+      "then": {
+        "effect": "audit"
+      }
+    }

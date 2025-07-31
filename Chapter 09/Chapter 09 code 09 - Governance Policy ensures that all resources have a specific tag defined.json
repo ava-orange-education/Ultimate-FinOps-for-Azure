@@ -1,0 +1,46 @@
+{
+  "properties": {
+    "displayName": "Require a tag on resources",
+    "description": "This policy ensures that all resources have a specific tag defined.",
+    "mode": "Indexed",
+    "parameters": {
+      "tagName": {
+        "type": "String",
+        "metadata": {
+          "description": "Name of the tag to be applied to resources",
+          "displayName": "Tag Name"
+        },
+        "defaultValue": "Environment"
+      },
+      "tagValue": {
+        "type": "String",
+        "metadata": {
+          "description": "Value of the tag to be applied to resources",
+          "displayName": "Tag Value"
+        },
+        "defaultValue": "Production"
+      }
+    },
+    "policyRule": {
+      "if": {
+        "field": "[concat('tags[', parameters('tagName'), ']')]",
+        "exists": "false"
+      },
+      "then": {
+        "effect": "modify",
+        "details": {
+          "roleDefinitionIds": [
+            "/providers/microsoft.authorization/roleDefinitions/00000000-0000-0000-0000-000000000000"
+          ],
+          "operations": [
+            {
+              "operation": "add",
+              "field": "[concat('tags[', parameters('tagName'), ']')]",
+              "value": "[parameters('tagValue')]"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

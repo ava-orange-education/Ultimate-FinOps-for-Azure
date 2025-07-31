@@ -1,0 +1,4 @@
+Resources
+| where type == "microsoft.network/publicIPAddresses"
+| where properties['ipConfiguration'] == ""
+| project name, location, properties['ipAddress'], properties['publicIPAddressVersion']

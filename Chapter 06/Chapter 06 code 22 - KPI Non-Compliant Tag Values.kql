@@ -1,0 +1,5 @@
+Resources
+| where tags['Owner'] !in ("Finance", "Marketing", "Engineering") or
+       tags['Project'] !in ("Alpha", "Beta") or
+       tags['Department'] !in ("IT", "HR", "Sales")
+| summarize Count = count()

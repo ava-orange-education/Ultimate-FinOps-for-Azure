@@ -1,0 +1,4 @@
+Resources 
+| where type contains "loadbalancers" 
+| extend backendPools = properties['backendAddressPools'] 
+| where array_length(backendPools) == 0

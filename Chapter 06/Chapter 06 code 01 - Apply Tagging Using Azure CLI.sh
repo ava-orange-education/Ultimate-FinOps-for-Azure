@@ -1,0 +1,1 @@
+az tag create --resource-id /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/virtualMachines/{vmName} --tags Department=Finance Project=Alpha

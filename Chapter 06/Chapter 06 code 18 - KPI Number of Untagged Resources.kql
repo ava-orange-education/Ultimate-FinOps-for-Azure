@@ -1,0 +1,3 @@
+Resources
+| where isnull(tags)
+| summarize Count = count()

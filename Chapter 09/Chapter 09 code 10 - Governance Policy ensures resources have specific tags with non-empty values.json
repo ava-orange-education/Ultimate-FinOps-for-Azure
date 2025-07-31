@@ -1,0 +1,66 @@
+{
+  "properties": {
+    "displayName": "Require specific tags on resources",
+    "description": "This policy ensures that resources have specific tags with non-empty values.",
+    "mode": "All",
+    "parameters": {
+      "requiredTags": {
+        "type": "Array",
+        "metadata": {
+          "description": "The list of tags that must be present on each resource.",
+          "displayName": "Required Tags"
+        },
+        "defaultValue": [
+          "Environment",
+          "Department",
+          "Project"
+        ]
+      }
+    },
+    "policyRule": {
+      "if": {
+        "anyOf": [
+          {
+            "allOf": [
+              {
+                "field": "[concat('tags[', parameters('requiredTags')[0], ']')]",
+                "exists": "false"
+              },
+              {
+                "field": "[concat('tags[', parameters('requiredTags')[0], ']')]",
+                "notEquals": ""
+              }
+            ]
+          },
+          {
+            "allOf": [
+              {
+                "field": "[concat('tags[', parameters('requiredTags')[1], ']')]",
+                "exists": "false"
+              },
+              {
+                "field": "[concat('tags[', parameters('requiredTags')[1], ']')]",
+                "notEquals": ""
+              }
+            ]
+          },
+          {
+            "allOf": [
+              {
+                "field": "[concat('tags[', parameters('requiredTags')[2], ']')]",
+                "exists": "false"
+              },
+              {
+                "field": "[concat('tags[', parameters('requiredTags')[2], ']')]",
+                "notEquals": ""
+              }
+            ]
+          }
+        ]
+      },
+      "then": {
+        "effect": "deny"
+      }
+    }
+  }
+}

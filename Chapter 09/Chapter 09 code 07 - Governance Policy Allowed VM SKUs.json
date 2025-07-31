@@ -1,0 +1,40 @@
+{
+  "properties": {
+    "displayName": "Allowed VM SKUs",
+    "description": "This policy restricts the types of Virtual Machines that can be deployed in your environment.",
+    "mode": "All",
+    "parameters": {
+      "allowedSKUs": {
+        "type": "Array",
+        "metadata": {
+          "description": "The list of allowed VM SKUs.",
+          "displayName": "Allowed VM SKUs"
+        },
+        "defaultValue": [
+          "Standard_B1s",
+          "Standard_B2s",
+          "Standard_D2s_v3"
+        ]
+      }
+    },
+    "policyRule": {
+      "if": {
+        "allOf": [
+          {
+            "field": "type",
+            "equals": "Microsoft.Compute/virtualMachines"
+          },
+          {
+            "not": {
+              "field": "Microsoft.Compute/virtualMachines/sku.name",
+              "in": "[parameters('allowedSKUs')]"
+            }
+          }
+        ]
+      },
+      "then": {
+        "effect": "deny"
+      }
+    }
+  }
+}

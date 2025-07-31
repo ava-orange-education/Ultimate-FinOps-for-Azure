@@ -1,0 +1,5 @@
+Resources
+| extend MissingOwnerTag = iff(isnull(tags['Owner']), "Missing", "Present")
+| extend MissingProjectTag = iff(isnull(tags['Project']), "Missing", "Present")
+| extend MissingDepartmentTag = iff(isnull(tags['Department']), "Missing", "Present")
+| where MissingOwnerTag == "Missing" or MissingProjectTag == "Missing" or MissingDepartmentTag == "Missing"

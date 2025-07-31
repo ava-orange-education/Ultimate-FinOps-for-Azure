@@ -1,0 +1,3 @@
+Resources
+| summarize TotalResources = count(), ResourcesWithAllTags = countif(tags has 'Owner' and tags has 'Project' and tags has 'Department')
+| extend TagComplianceRate = (ResourcesWithAllTags * 100) / TotalResources

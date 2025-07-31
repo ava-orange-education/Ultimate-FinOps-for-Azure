@@ -1,0 +1,1 @@
+az resource show --id /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/virtualMachines/{vmName} --query tags

@@ -1,0 +1,3 @@
+Resources
+| where type == "microsoft.compute/virtualmachines" and (isnull(tags['Owner']) or isnull(tags['Project']) or isnull(tags['Department']))
+| summarize Count = count()

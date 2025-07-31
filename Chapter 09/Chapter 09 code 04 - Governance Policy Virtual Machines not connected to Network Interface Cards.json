@@ -1,0 +1,27 @@
+{
+  "properties": {
+    "displayName": "Audit Orphan Virtual Machines",
+    "description": "This policy audits virtual machines that are not connected to any network interface cards (NICs).",
+    "mode": "All",
+    "parameters": {},
+    "policyRule": {
+      "if": {
+        "allOf": [
+          {
+            "field": "type",
+            "equals": "Microsoft.Compute/virtualMachines"
+          },
+          {
+            "not": {
+              "field": "Microsoft.Compute/virtualMachines/networkProfile.networkInterfaces[*].id",
+              "exists": true
+            }
+          }
+        ]
+      },
+      "then": {
+        "effect": "audit"
+      }
+    }
+  }
+}

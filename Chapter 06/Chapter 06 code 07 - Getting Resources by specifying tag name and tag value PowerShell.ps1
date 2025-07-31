@@ -1,0 +1,1 @@
+(Get-AzResource -Tag @{ "Department"="Finance"}).Name

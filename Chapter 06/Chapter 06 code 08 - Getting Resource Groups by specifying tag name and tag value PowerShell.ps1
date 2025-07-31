@@ -1,0 +1,1 @@
+(Get-AzResourceGroup -Tag @{ "Department"="Finance" }).ResourceGroupName

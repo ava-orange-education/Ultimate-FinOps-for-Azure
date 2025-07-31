@@ -1,0 +1,40 @@
+{
+  "properties": {
+    "displayName": "Allow only LRS Storage Accounts in Non-Prod",
+    "description": "This policy restricts storage accounts in non-production environments to use Locally Redundant Storage (LRS) only.",
+    "mode": "All",
+    "parameters": {
+      "environmentTag": {
+        "type": "String",
+        "metadata": {
+          "description": "The tag used to identify non-production environments.",
+          "displayName": "Environment Tag"
+        },
+        "defaultValue": "Non-Prod"
+      }
+    },
+    "policyRule": {
+      "if": {
+        "allOf": [
+          {
+            "field": "tags.Environment",
+            "equals": "[parameters('environmentTag')]"
+          },
+          {
+            "field": "type",
+            "equals": "Microsoft.Storage/storageAccounts"
+          },
+          {
+            "not": {
+              "field": "Microsoft.Storage/storageAccounts/sku.name",
+              "equals": "Standard_LRS"
+            }
+          }
+        ]
+      },
+      "then": {
+        "effect": "deny"
+      }
+    }
+  }
+}

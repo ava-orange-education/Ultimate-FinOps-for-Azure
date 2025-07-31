@@ -1,0 +1,4 @@
+Resources 
+| where type == "microsoft.compute/disks" 
+| where properties['diskState'] == "Unattached" 
+| project name, type, location, properties['diskState']

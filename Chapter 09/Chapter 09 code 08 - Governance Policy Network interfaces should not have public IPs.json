@@ -1,0 +1,25 @@
+{
+  "properties": {
+    "displayName": "Network interfaces should not have public IPs",
+    "description": "This policy ensures that network interfaces do not have public IP addresses assigned.",
+    "mode": "All",
+    "parameters": {},
+    "policyRule": {
+      "if": {
+        "allOf": [
+          {
+            "field": "type",
+            "equals": "Microsoft.Network/networkInterfaces"
+          },
+          {
+            "field": "Microsoft.Network/networkInterfaces/ipconfigurations[*].publicIPAddress.id",
+            "exists": true
+          }
+        ]
+      },
+      "then": {
+        "effect": "deny"
+      }
+    }
+  }
+}

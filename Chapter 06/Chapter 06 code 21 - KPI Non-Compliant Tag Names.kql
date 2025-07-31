@@ -1,0 +1,3 @@
+Resources
+| where not(tags has 'Owner' or tags has 'Project' or tags has 'Department')
+| summarize Count = count()

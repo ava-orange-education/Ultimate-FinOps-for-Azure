@@ -1,0 +1,1 @@
+New-AzResourceGroupDeployment -ResourceGroupName {resourceGroup} -TemplateFile {templateFilePath}

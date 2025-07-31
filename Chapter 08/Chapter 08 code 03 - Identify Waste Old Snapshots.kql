@@ -1,0 +1,4 @@
+Resources
+| where type =~ 'Microsoft.Compute/snapshots'
+| extend TimeCreated = properties.timeCreated
+| where TimeCreated < now(-30d)
